@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Hug Day! 🤗</title>
+    <style>
+        :root {
+            --pink-light: #ffebf0;
+            --pink-main: #ff85a1;
+            --pink-dark: #ff4d6d;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--pink-light);
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+        }
+
+        /* --- Page 1: Intro --- */
+        #page1 {
+            text-align: center;
+            animation: fadeIn 2s;
+        }
+
+        .hug-animation {
+            font-size: 80px;
+            animation: pulse 1.5s infinite;
+        }
+
+        h1 { color: var(--pink-dark); }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: var(--pink-main);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover { background-color: var(--pink-dark); transform: scale(1.1); }
+
+        /* --- Page 2: Balloons --- */
+        #page2 {
+            display: none;
+            width: 100%; height: 100%;
+            position: relative;
+        }
+
+        .balloon {
+            width: 80px; height: 100px;
+            background-color: var(--pink-main);
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            position: absolute;
+            bottom: -150px;
+            cursor: pointer;
+            display: flex; justify-content: center; align-items: center;
+            font-weight: bold; color: white;
+            animation: float Up 6s linear forwards;
+        }
+
+        /* --- Page 3: The Letter --- */
+        #letter-container {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 80%;
+            text-align: center;
+            border: 3px dashed var(--pink-main);
+            animation: zoomIn 0.5s;
+        }
+
+        /* --- Animations --- */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn { from { transform: scale(0); } to { transform: scale(1); } }
+        @keyframes floatUp {
+            to { transform: translateY(-110vh); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page1">
+        <div class="hug-animation">🤗</div>
+        <h1>Happy Hug Day!</h1>
+        <p>Ready for a virtual squeeze?</p>
+        <button onclick="startExperience()">Tap for Magic</button>
+    </div>
+
+    <div id="page2">
+        <h2 style="text-align: center; color: var(--pink-dark); width: 100%;">Pop a balloon to find the letter!</h2>
+    </div>
+
+    <div id="letter-container">
+        <h2 style="color: var(--pink-dark)">A Special Hug for You</h2>
+        <p id="letter-text">"Sending you a warm, squishy, virtual hug! May your day be as sweet and lovely as you are. 🤗✨"</p>
+        <button onclick="location.reload()">Send Another Hug</button>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+        const letter = document.getElementById('letter-container');
+        const music = document.getElementById('bgMusic');
+
+        function startExperience() {
+            page1.style.display = 'none';
+            page2.style.display = 'block';
+            music.play();
+            createBalloons();
+        }
+
+        function createBalloons() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const b = document.createElement('div');
+                    b.className = 'balloon';
+                    b.style.left = Math.random() * 90 + 'vw';
+                    b.style.
